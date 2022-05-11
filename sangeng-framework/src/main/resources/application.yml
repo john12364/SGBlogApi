@@ -1,0 +1,5 @@
+mybatis-plus:
+  global-config:
+    db-config:
+      #表明前缀
+      table-prefix: tb_
