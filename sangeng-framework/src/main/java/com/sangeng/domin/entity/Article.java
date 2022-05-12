@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("article")
+@TableName("sg_article")
 public class Article implements Serializable {
 
     private Long id;

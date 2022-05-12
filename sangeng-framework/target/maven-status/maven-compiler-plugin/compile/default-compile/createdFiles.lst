@@ -1,0 +1,3 @@
+com\sangeng\service\ArticleService.class
+com\sangeng\domin\entity\Article.class
+com\sangeng\mapper\ArticleMapper.class
