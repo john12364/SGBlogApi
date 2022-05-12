@@ -10,6 +10,7 @@ import com.sangeng.domin.result.ResponseResult;
 import com.sangeng.domin.vo.HotArticleVo;
 import com.sangeng.mapper.ArticleMapper;
 import com.sangeng.service.ArticleService;
+import com.sangeng.utils.BeanCopyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -36,12 +37,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Article> articles = page.getRecords();
 
         //bean拷贝
-        List<HotArticleVo> articleVos = new ArrayList<>();
-        for(Article article:articles) {
-            HotArticleVo articleVo = new HotArticleVo();
-            BeanUtils.copyProperties(article,articleVo);
-            articleVos.add(articleVo);
-        }
+//        for(Article article:articles) {
+//            HotArticleVo articleVo = new HotArticleVo();
+//            BeanUtils.copyProperties(article,articleVo);
+//            articleVos.add(articleVo);
+//        }
+
+        //stream流
+        List<HotArticleVo> articleVos = BeanCopyUtils.copyBeanList(articles,HotArticleVo.class);
         return ResponseResult.okResult(articleVos);
 
     }

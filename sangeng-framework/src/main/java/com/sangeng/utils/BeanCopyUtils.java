@@ -1,10 +1,34 @@
 package com.sangeng.utils;
 
+import org.springframework.beans.BeanUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class BeanCopyUtils {
     private BeanCopyUtils() {
     }
 
-//    public static <T,V> V copyBean(T source,Class<V> class) {
-//
-//    }
+    public static <T,V> V copyBean(T source,Class<V> clazz) {
+        //创建目标对象
+        V result = null;
+        //空参构造newInstance()
+        try {
+            result = clazz.newInstance();
+            BeanUtils.copyProperties(source,result);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        //返回结果
+        return result;
+    }
+
+
+    public static <O,V> List<V> copyBeanList(List<O> list,Class<V> clazz) {
+        return list.stream()
+                .map(item -> copyBean(item,clazz))
+                .collect(Collectors.toList());
+    }
 }
