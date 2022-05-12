@@ -19,4 +19,10 @@ public class SystemConstants {
      *  热门文章默认当前分页大小 10
      */
     public static final int ARTICLE_PAGE_SIZE = 10;
+    /**
+     *  文章分类默认值 0
+     */
+    public static final String CATEGORY_STATUS_NORMAL = "0";
+
+
 }
