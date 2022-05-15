@@ -10,8 +10,9 @@ public enum AppHttpCodeEnum {
     PHONENUMBER_EXIST(502,"手机号已存在"),
     EMAIL_EXIST(503,"邮箱已存在"),
     REQUIRE_USERNAME(504,"必须填写用户名"),
-    LOGIN_ERROR(505,"用户名或密码错误");
-
+    REQUIRE_PASSWORD(506,"必须填写用户密码"),
+    LOGIN_ERROR(506,"用户名或密码错误"),
+    CONTENT_NOT_NULL(601,"评论信息不能为空");
     int code;
     String msg;
     AppHttpCodeEnum(int code, String errorMessage) {

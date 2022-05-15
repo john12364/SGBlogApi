@@ -2,10 +2,12 @@ package com.sangeng.domin.entity;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -20,6 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sg_article")
+@Accessors(chain = true) //使得set方法返回Article对象
 public class Article implements Serializable {
 
     private Long id;
@@ -31,6 +34,8 @@ public class Article implements Serializable {
     private String summary;
     //所属分类id
     private Long categoryId;
+    @TableField(exist = false)
+    private String categoryName;
     //缩略图
     private String thumbnail;
     //是否置顶（0否，1是）
