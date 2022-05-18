@@ -1,7 +1,8 @@
 package com.sangeng.controller;
 
+import com.sangeng.annotation.SystemLog;
 import com.sangeng.domin.result.ResponseResult;
-import com.sangeng.domin.vo.LoginFormVo;
+import com.sangeng.domin.vo.User.LoginFormVo;
 import com.sangeng.enums.AppHttpCodeEnum;
 import com.sangeng.exception.SystemException;
 import com.sangeng.service.BlogLoginService;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "博客页面登录")
 @RestController
-@RequestMapping("/user")
+@RequestMapping
 public class BlogLoginController {
     @Autowired
     private BlogLoginService blogLoginService;
@@ -28,7 +29,10 @@ public class BlogLoginController {
     @ApiOperation(value = "博客登录")
     @ApiImplicitParam(name = "user",value = "用户登录信息",required = true,dataType = "LoginVo")
     @PostMapping("/login")
+    @SystemLog(businessName = "博客登录")
     public ResponseResult login(@RequestBody LoginFormVo user){
+
+
         if(!StringUtils.hasText(user.getUserName())) {
             //提示要传用名
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
@@ -42,6 +46,7 @@ public class BlogLoginController {
         return blogLoginService.login(user);
     }
     @ApiOperation(value = "退出登录")
+    @SystemLog(businessName = "退出登录")
     @PostMapping("/logout")
     public ResponseResult logout(){
         return blogLoginService.logout();

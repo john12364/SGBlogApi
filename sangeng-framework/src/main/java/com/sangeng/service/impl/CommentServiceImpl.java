@@ -35,6 +35,9 @@ import java.util.Optional;
 public class   CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
     @Autowired
     private BlogLoginService userService;
+
+
+
     @Override
     public ResponseResult commentList(String commentType,Long articleId, Integer pageNum, Integer pageSize) {
 
@@ -53,6 +56,8 @@ public class   CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> im
         Optional.ofNullable(commentVoList).orElse(new ArrayList<>())
                 .parallelStream()
                 .forEach(item -> {
+                    String avartar = userService.getById(item.getCreateBy()).getAvatar();
+                    item.setAvator(avartar);
                     //查询对应的子评论
                     List<CommentVo> children = getChildren(commentType,item.getId());
                     item.setChildren(children);
@@ -94,6 +99,7 @@ public class   CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> im
         //根评论 rootId为-1
         queryWrapper.eq(Comment::getType,type);  //查询文章评论查询
         List<Comment> comment =  this.list(queryWrapper);
+
         return toCommentVoList(comment);
     }
 
@@ -104,6 +110,8 @@ public class   CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> im
         Optional.ofNullable(lists).orElse(new ArrayList<>())
                 .parallelStream()
                 .forEach(comment -> {
+                    String avartar = userService.getById(comment.getCreateBy()).getAvatar();
+                    comment.setAvator(avartar);
                     //通过creatyBy查询用户的昵称并赋值
                     if(comment.getCreateBy() != -1) {
                         String nickName = userService.getById(comment.getCreateBy()).getNickName();

@@ -28,7 +28,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
             //处理用户请求时没有携带token或者token无效
             result = ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
         }else {
-            result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR.getCode(),"认证或授权失败");
+            result = ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_ERROR.getCode(),"认证或授权失败");
         }
         //响应给前端
         WebUtils.renderString(httpServletResponse, JSON.toJSONString(result));

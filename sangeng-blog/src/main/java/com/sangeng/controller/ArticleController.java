@@ -1,6 +1,7 @@
 package com.sangeng.controller;
 
 
+import com.sangeng.annotation.SystemLog;
 import com.sangeng.domin.entity.Article;
 import com.sangeng.domin.result.ResponseResult;
 import com.sangeng.service.ArticleService;
@@ -19,19 +20,23 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
-    @ApiOperation(value = "文章信息")
+
+    @ApiOperation(value = "获取文章信息")
+    @SystemLog(businessName = "获取文章信息")
     @GetMapping("/list")
     public List<Article> test(){
         return articleService.list();
     }
 
     @ApiOperation(value = "热门文章信息")
+    @SystemLog(businessName = "热门文章信息")
     @GetMapping("/hotArticleList")
     public ResponseResult hotArticleList(){
         ResponseResult result =  articleService.hotArticleList();
         return result;
     }
     @ApiOperation(value = "分页查询文章信息")
+    @SystemLog(businessName = "分页查询文章信息")
     @ApiImplicitParams({@ApiImplicitParam(name = "pageNum",required = false,value = "当前页"),
             @ApiImplicitParam(name = "pageSize",required = false,value = "每页大小"),
             @ApiImplicitParam(name = "categoryId",required = false,value = "分类id")})
@@ -42,7 +47,17 @@ public class ArticleController {
         return articleService.articleList(pageNum,pageSize,categoryId);
     }
 
+
+    @ApiOperation(value = "更新浏览次数")
+    @SystemLog(businessName = "更新浏览次数")
+    @PutMapping("/updateViewCount/{id}")
+    public ResponseResult articleList(@PathVariable("id")  Long id) {
+        return articleService.updateViewCount(id);
+    }
+
+
     @ApiOperation(value = "根据文章表id查询文章详情信息")
+    @SystemLog(businessName = "根据文章表id查询文章详情信息")
     @GetMapping("/{id}")
     @ApiImplicitParam(name = "id",required = true,value = "文章id")
     public ResponseResult getArticleDetail(@PathVariable("id") Long id) {

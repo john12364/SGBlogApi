@@ -12,4 +12,6 @@ public interface ArticleService extends IService<Article> {
 
     //根据文章id查询文章详情信息
     ResponseResult getArticleDetail(Long id);
+    //根据id更新Redis当中的浏览次数
+    ResponseResult updateViewCount(Long id);
 }

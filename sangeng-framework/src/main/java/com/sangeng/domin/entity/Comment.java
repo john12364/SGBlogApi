@@ -42,6 +42,9 @@ public class Comment  {
      */
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
+
+    @TableField(exist = false)
+    private String avator;
     /**
      * 创建时间
      */

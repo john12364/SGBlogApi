@@ -29,5 +29,9 @@ public class CommentVo {
     private Date createTime;
     //写这个评论人的名字
     private String username;
+
+    private String avator;
     private List<CommentVo> children;
+
+
 }

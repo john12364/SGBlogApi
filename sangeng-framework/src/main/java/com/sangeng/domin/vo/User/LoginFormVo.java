@@ -1,4 +1,4 @@
-package com.sangeng.domin.vo;
+package com.sangeng.domin.vo.User;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

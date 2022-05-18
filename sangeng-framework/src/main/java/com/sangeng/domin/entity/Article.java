@@ -23,7 +23,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @TableName("sg_article")
 @Accessors(chain = true) //使得set方法返回Article对象
-public class Article implements Serializable {
+public class   Article implements Serializable {
 
     private Long id;
     //标题
@@ -56,6 +56,11 @@ public class Article implements Serializable {
     private Date updateTime;
     //删除标志（0代表未删除，1代表已删除）
     private Integer delFlag;
+
+    public Article(Long id,Long viewCount) {
+        this.id = id;
+        this.viewCount = viewCount;
+    }
 }
 
 
